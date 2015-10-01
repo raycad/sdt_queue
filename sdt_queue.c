@@ -14,7 +14,7 @@
 
 #define DEFAULT_MAX_QUEUE_SIZE 1000
 
-bool sdt_release(sdt_queue *q);
+bool sdt_queue_release(sdt_queue *q);
 
 sdt_queue *sdt_queue_create()
 {
@@ -84,7 +84,7 @@ int sdt_queue_size(sdt_queue *q)
 }
 
 // Release memory
-bool sdt_release(sdt_queue *q)
+bool sdt_queue_release(sdt_queue *q)
 {
     sdt_node *tmp = q->first_node;
     sdt_node *node_it = NULL;
@@ -99,7 +99,7 @@ bool sdt_release(sdt_queue *q)
 
 bool sdt_queue_clear(sdt_queue *q)
 {
-    if (!sdt_release(q))
+    if (!sdt_queue_release(q))
         return false;
 
     q->size = 0;
@@ -111,7 +111,7 @@ bool sdt_queue_clear(sdt_queue *q)
 
 bool sdt_queue_destroy(sdt_queue *q)
 {
-    if (!sdt_release(q))
+    if (!sdt_queue_release(q))
         return false;
 
     free(q);
